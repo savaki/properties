@@ -362,11 +362,9 @@ func (p *Properties) Len() int {
 
 // Keys returns all keys.
 func (p *Properties) Keys() []string {
-	keys := make([]string, len(p.m))
+	keys := []string{}
 	for k, _ := range p.m {
-		if strings.TrimSpace(k) != "" {
-			keys = append(keys, k)
-		}
+		keys = append(keys, k)
 	}
 	return keys
 }
