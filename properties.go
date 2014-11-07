@@ -46,6 +46,9 @@ type Properties struct {
 	Postfix string
 
 	m map[string]string
+
+	// keys in the order they appear in file.  map doesn't preserve ordering
+	k []string
 }
 
 // NewProperties creates a new Properties struct with the default
@@ -54,6 +57,7 @@ func NewProperties() *Properties {
 	return &Properties{
 		Prefix:  "${",
 		Postfix: "}",
+		k:       make([]string, 0),
 		m:       make(map[string]string),
 	}
 }
@@ -360,10 +364,10 @@ func (p *Properties) Len() int {
 	return len(p.m)
 }
 
-// Keys returns all keys.
+// Keys return a copy of all keys.
 func (p *Properties) Keys() []string {
 	keys := []string{}
-	for k, _ := range p.m {
+	for _, k := range p.k {
 		keys = append(keys, k)
 	}
 	return keys

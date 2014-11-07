@@ -32,6 +32,7 @@ func parse(input string) (properties *Properties, err error) {
 			properties.m[key] = ""
 			break
 		}
+		properties.k = append(properties.k, key)
 		properties.m[key] = token.val
 	}
 

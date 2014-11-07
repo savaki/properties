@@ -566,6 +566,14 @@ func (l *TestSuite) TestKeys(c *C) {
 		}
 	}
 }
+
+func (l *TestSuite) TestKeysOrder(c *C) {
+	input := "key1 = a\nkey2 = b\nkey3 = c\nkey4 = d\nkey5 = e"
+	p, err := parse(input)
+	c.Assert(err, IsNil)
+	c.Assert(p.Keys(), DeepEquals, []string{"key1", "key2", "key3", "key4", "key5"})
+}
+
 func (l *TestSuite) TestWrite(c *C) {
 	for _, test := range writeTests {
 		input, output, enc := test[0], test[1], test[2]
